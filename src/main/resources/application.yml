@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: User
+  datasource:
+    url: jdbc:postgresql://localhost:5432/look_user
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+server:
+  port: 8888
+#  ssl:
+#    key-store: classpath:keystore.p12
+#    key-store-password: hgxljl
+#    key-store-type: PKCS12
+#    key-alias: tomcat
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka/
+wx-code-api:
+  base-url: https://api.weixin.qq.com/sns/jscode2session
+  app-id: wx1e3bc888e28279a6
+  secret: d65d410d1f8013c566ae08c45200f9f3
