@@ -1,8 +1,6 @@
 package user.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import core.util.JsonTool;
-import core.util.UuidTool;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,7 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.client.RestTemplate;
-import user.entity.User;
+import user.util.JsonTool;
+import user.util.UuidTool;
 
 import java.util.Map;
 
@@ -42,4 +41,7 @@ public class TokenService {
         return token;
     }
 
+    public void delete(String token) {
+        stringRedisTemplate.delete(token);
+    }
 }

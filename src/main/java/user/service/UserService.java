@@ -14,7 +14,7 @@ public class UserService {
     private UserMapper userMapper;
 
     public void add(User user) {
-        if (get(user.getOpenId()) != null) {
+        if (get(user.getOpenId()) == null) {
             userMapper.insert(user);
         }
     }
@@ -23,3 +23,4 @@ public class UserService {
         return userMapper.select(openId);
     }
 }
+

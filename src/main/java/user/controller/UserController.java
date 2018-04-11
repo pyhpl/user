@@ -1,13 +1,10 @@
 package user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import user.entity.User;
-import user.service.TokenService;
 import user.service.UserService;
 
 @RestController

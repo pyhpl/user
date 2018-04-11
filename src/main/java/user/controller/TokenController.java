@@ -17,6 +17,12 @@ public class TokenController {
     public String get(@RequestParam String code) {
         return tokenService.get(code);
     }
+
+    @DeleteMapping("")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@RequestHeader("token") String token) {
+        tokenService.delete(token);
+    }
 }
 
 
