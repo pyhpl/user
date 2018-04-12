@@ -1,4 +1,4 @@
-package user.entity;
+package org.ljl.look.user.entity;
 
 import lombok.*;
 

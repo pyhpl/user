@@ -1,8 +1,8 @@
-package user.mapper;
+package org.ljl.look.user.mapper;
 
 import org.apache.ibatis.annotations.*;
+import org.ljl.look.user.entity.User;
 import org.springframework.stereotype.Repository;
-import user.entity.User;
 
 @Mapper
 @Repository

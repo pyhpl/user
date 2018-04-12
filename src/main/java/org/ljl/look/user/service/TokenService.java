@@ -1,7 +1,9 @@
-package user.service;
+package org.ljl.look.user.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.extern.slf4j.Slf4j;
+import org.ljl.look.user.util.JsonTool;
+import org.ljl.look.user.util.UuidTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -9,8 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.client.RestTemplate;
-import user.util.JsonTool;
-import user.util.UuidTool;
 
 import java.util.Map;
 

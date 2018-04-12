@@ -1,7 +1,6 @@
-package user.configuration;
+package org.ljl.look.user.configuration;
 
 import org.springframework.context.annotation.Configuration;
-import user.util.UuidTool;
 
 @Configuration
 public class ConstConfig {

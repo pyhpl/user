@@ -1,11 +1,11 @@
-package user.controller;
+package org.ljl.look.user.controller;
 
+import org.ljl.look.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import user.entity.User;
-import user.service.UserService;
+import org.ljl.look.user.service.UserService;
 
 @RestController
 @RequestMapping("/api/user")

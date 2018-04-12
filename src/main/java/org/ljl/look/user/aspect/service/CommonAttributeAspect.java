@@ -1,26 +1,24 @@
-package user.aspect.service;
+package org.ljl.look.user.aspect.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.ljl.look.user.util.UuidTool;
 import org.springframework.stereotype.Component;
-import user.configuration.ConstConfig;
-import user.entity.Tag;
-import user.util.UuidTool;
+import org.ljl.look.user.configuration.ConstConfig;
+import org.ljl.look.user.entity.Tag;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Aspect
 @Component
 @Slf4j
 public class CommonAttributeAspect {
 
-    @Pointcut("execution(public * user.service.TagService.add(..))")
+    @Pointcut("execution(public * org.ljl.look.user.service.TagService.add(..))")
     public void addTag(){}
 
     @Before("addTag()")
@@ -34,7 +32,7 @@ public class CommonAttributeAspect {
         tag.setValid((short) 1);
     }
 
-    @Pointcut("execution(public * user.service.TagService.adds(..))")
+    @Pointcut("execution(public * org.ljl.look.user.service.TagService.adds(..))")
     public void addTags(){}
 
 

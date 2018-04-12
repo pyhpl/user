@@ -1,8 +1,8 @@
-package user.mapper;
+package org.ljl.look.user.mapper;
 
 import org.apache.ibatis.annotations.*;
+import org.ljl.look.user.entity.Tag;
 import org.springframework.stereotype.Repository;
-import user.entity.Tag;
 
 import java.util.List;
 
@@ -18,3 +18,5 @@ public interface TagMapper {
     @Delete("DELETE FROM tag WHERE uuid=#{uuid}::uuid")
     void delete(@Param("uuid") String uuid);
 }
+
+

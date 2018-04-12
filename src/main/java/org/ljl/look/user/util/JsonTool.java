@@ -1,4 +1,4 @@
-package user.util;
+package org.ljl.look.user.util;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -36,4 +36,3 @@ public class JsonTool {
         }
     }
 }
-

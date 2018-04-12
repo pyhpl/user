@@ -1,4 +1,4 @@
-package user.util;
+package org.ljl.look.user.util;
 
 import java.util.UUID;
 
@@ -7,4 +7,3 @@ public class UuidTool {
         return UUID.randomUUID().toString();
     }
 }
-

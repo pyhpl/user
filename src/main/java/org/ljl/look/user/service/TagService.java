@@ -1,11 +1,10 @@
-package user.service;
+package org.ljl.look.user.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import user.entity.Tag;
-import user.mapper.TagMapper;
-import user.util.UuidTool;
+import org.ljl.look.user.entity.Tag;
+import org.ljl.look.user.mapper.TagMapper;
 
 import java.util.List;
 import java.util.stream.Collectors;

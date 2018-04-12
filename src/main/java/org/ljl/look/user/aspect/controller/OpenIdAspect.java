@@ -1,17 +1,17 @@
-package user.aspect.controller;
+package org.ljl.look.user.aspect.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.ljl.look.user.entity.Tag;
+import org.ljl.look.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import user.entity.Tag;
-import user.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
@@ -25,10 +25,10 @@ public class OpenIdAspect {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
-    @Pointcut("execution(public * user.controller.UserController.post(..))")
+    @Pointcut("execution(public * org.ljl.look.user.controller.UserController.post(..))")
     public void postUser(){}
 
-    @Pointcut("execution(public * user.controller.TagController.posts(..))")
+    @Pointcut("execution(public * org.ljl.look.user.controller.TagController.posts(..))")
     public void postTags() {}
 
     @Before("postUser()||postTags()")

@@ -1,4 +1,4 @@
-package user;
+package org.ljl.look;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableTransactionManagement
-@MapperScan("user.mapper")
+@MapperScan("org.ljl.look.user.mapper")
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

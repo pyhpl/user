@@ -1,11 +1,11 @@
-package user.listener;
+package org.ljl.look.user.listener;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
-import user.configuration.ConstConfig;
+import org.ljl.look.user.configuration.ConstConfig;
 
 /**
  * 加载系统初始化数据（游客数据）

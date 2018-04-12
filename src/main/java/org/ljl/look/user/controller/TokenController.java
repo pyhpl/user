@@ -1,9 +1,9 @@
-package user.controller;
+package org.ljl.look.user.controller;
 
+import org.ljl.look.user.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import user.service.TokenService;
 
 @RestController
 @RequestMapping("/api/token")

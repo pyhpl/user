@@ -1,14 +1,14 @@
-package user.entity;
+package org.ljl.look.user.entity;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
 @Getter
 @Setter
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class Joins {
     private String userOpenId;
     private String activityUuid;

@@ -1,12 +1,12 @@
-package user.controller;
+package org.ljl.look.user.controller;
 
+import org.ljl.look.user.configuration.ConstConfig;
+import org.ljl.look.user.entity.Tag;
+import org.ljl.look.user.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import user.configuration.ConstConfig;
-import user.entity.Tag;
-import user.service.TagService;
 
 import java.util.List;
 
