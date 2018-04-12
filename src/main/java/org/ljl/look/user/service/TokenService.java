@@ -35,7 +35,7 @@ public class TokenService {
         String openId = (String) userIdentityMap.get("openid");
         // 将openid使用md5加密生成token
         String token = DigestUtils.md5DigestAsHex((openId + UuidTool.getValue()).getBytes());
-        log.info("token(" + openId + "): " + token);
+        log.info("token({}): {}", openId, token);
         // 将token存入redis中
         stringRedisTemplate.opsForValue().set(token, openId);
         return token;

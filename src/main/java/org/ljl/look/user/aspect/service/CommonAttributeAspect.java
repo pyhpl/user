@@ -25,25 +25,22 @@ public class CommonAttributeAspect {
     public void doBeforeAddTag(JoinPoint joinPoint) throws Exception {
         Tag tag = (Tag) joinPoint.getArgs()[0];
         tag.setUuid(UuidTool.getValue());
-        if (tag.getUserOpenId() == null) {
-            tag.setUserOpenId(ConstConfig.DEFAULT_VISITOR_OPEN_ID);
-        }
         tag.setCreateDate(new Date());
-        tag.setValid((short) 1);
+        tag.setValid(ConstConfig.VALID);
     }
 
-    @Pointcut("execution(public * org.ljl.look.user.service.TagService.adds(..))")
-    public void addTags(){}
-
-
-    @Before("addTags()")
-    public void doBeforeAddTags(JoinPoint joinPoint) throws Exception {
-        ((List<Tag>) joinPoint.getArgs()[0]).forEach(tag -> {
-            tag.setUuid(UuidTool.getValue());
-            tag.setCreateDate(new Date());
-            tag.setValid((short) 1);
-        });
-    }
+//    @Pointcut("execution(public * org.ljl.look.user.service.TagService.adds(..))")
+//    public void addTags(){}
+//
+//
+//    @Before("addTags()")
+//    public void doBeforeAddTags(JoinPoint joinPoint) throws Exception {
+//        ((List<Tag>) joinPoint.getArgs()[0]).forEach(tag -> {
+//            tag.setUuid(UuidTool.getValue());
+//            tag.setCreateDate(new Date());
+//            tag.setValid((short) 1);
+//        });
+//    }
 }
 
 

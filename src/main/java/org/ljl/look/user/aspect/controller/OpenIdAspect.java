@@ -28,10 +28,13 @@ public class OpenIdAspect {
     @Pointcut("execution(public * org.ljl.look.user.controller.UserController.post(..))")
     public void postUser(){}
 
+    @Pointcut("execution(public * org.ljl.look.user.controller.TagController.post(..))")
+    public void postTag() {}
+
     @Pointcut("execution(public * org.ljl.look.user.controller.TagController.posts(..))")
     public void postTags() {}
 
-    @Before("postUser()||postTags()")
+    @Before("postUser()||postTag()||postTags()")
     public void doBeforeWeavingOpenId(JoinPoint joinPoint) throws Exception {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
@@ -39,6 +42,8 @@ public class OpenIdAspect {
         Arrays.stream(joinPoint.getArgs()).forEach(arg -> {
             if (arg instanceof User) {
                 ((User) arg).setOpenId(openId);
+            } else if (arg instanceof Tag) {
+                ((Tag) arg).setUserOpenId(openId);
             }
             if (arg instanceof List) {
                 ((List) arg).forEach(e -> {

@@ -16,9 +16,8 @@ public class TagService {
     @Autowired
     private TagMapper tagMapper;
 
-    public List<String> gets(String openId) {
-        return tagMapper.selectByOpenId(openId).stream()
-            .map(Tag::getName).collect(Collectors.toList());
+    public List<Tag> gets(String userOpenId) {
+        return tagMapper.selectByUserOpenId(userOpenId);
     }
 
     public void add(Tag tag) {
@@ -26,10 +25,14 @@ public class TagService {
     }
 
     public void adds(List<Tag> tags) {
-        tags.forEach(tagMapper::insert);
+        tags.forEach(this::add);
     }
 
     public void delete(String uuid) {
         tagMapper.delete(uuid);
+    }
+
+    public void deletes(List<String> uuids) {
+        uuids.forEach(this::delete);
     }
 }

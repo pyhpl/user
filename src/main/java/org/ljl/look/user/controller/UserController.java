@@ -1,5 +1,6 @@
 package org.ljl.look.user.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.ljl.look.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.ljl.look.user.service.UserService;
 
 @RestController
 @RequestMapping("/api/user")
+@Slf4j
 public class UserController {
 
     @Autowired
@@ -24,5 +26,6 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     public void post(@Validated @RequestBody User user) {
         userService.add(user);
+        log.info("add user {}({})", user.getName(), user.getOpenId());
     }
 }

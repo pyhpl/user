@@ -5,6 +5,7 @@ import org.ljl.look.user.entity.Tag;
 import org.ljl.look.user.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,17 +22,20 @@ public class TagController {
 
     @GetMapping("s")
     @ResponseStatus(HttpStatus.OK)
-    public List<String> gets(@RequestHeader(value = "token", required = false, defaultValue = ConstConfig.DEFAULT_VISITOR_TOKEN) String token) {
+    public List<Tag> gets(@RequestHeader(value = "token", required = false, defaultValue = ConstConfig.DEFAULT_VISITOR_TOKEN) String token) {
         return tagService.gets(stringRedisTemplate.opsForValue().get(token));
     }
 
-    @PutMapping("")
+    @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public void post(@RequestBody Tag tag) {
+    public HttpHeaders post(@RequestBody Tag tag) {
         tagService.add(tag);
+        return new HttpHeaders() {{
+            set("uuid", tag.getUuid());
+        }};
     }
 
-    @PutMapping("s")
+    @PostMapping("s")
     @ResponseStatus(HttpStatus.CREATED)
     public void posts(@RequestBody List<Tag> tags) {
         tagService.adds(tags);
@@ -41,5 +45,11 @@ public class TagController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@RequestParam String uuid) {
         tagService.delete(uuid);
+    }
+
+    @DeleteMapping("s")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@RequestBody List<String> uuids) {
+        tagService.deletes(uuids);
     }
 }
