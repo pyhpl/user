@@ -30,6 +30,7 @@ repositories {
 }
 
 dependencies {
+    compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client') // Spring cloud客户端。
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.projectlombok:lombok:1.16.18')
     compile('org.postgresql:postgresql:42.1.1')
