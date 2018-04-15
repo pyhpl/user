@@ -8,9 +8,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.ljl.look.user.service.UserService;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/user")
-@Slf4j
 public class UserController {
 
     @Autowired
