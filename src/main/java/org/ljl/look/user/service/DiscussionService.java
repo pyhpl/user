@@ -23,4 +23,7 @@ public class DiscussionService {
         discussionMapper.insert(discussion);
     }
 
+    public int countByBelongToActivity(String belongToActivity) {
+        return discussionMapper.countByBelongToActivity(belongToActivity);
+    }
 }

@@ -5,15 +5,12 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-import org.ljl.look.user.entity.Discussion;
-import org.ljl.look.user.entity.Focus;
+import org.ljl.look.user.entity.*;
 import org.ljl.look.user.util.UuidTool;
 import org.springframework.stereotype.Component;
 import org.ljl.look.user.configuration.ConstConfig;
-import org.ljl.look.user.entity.Tag;
 
 import java.util.Date;
-import java.util.List;
 
 @Aspect
 @Component
@@ -26,10 +23,16 @@ public class CommonAttributeAspect {
     @Pointcut("execution(public * org.ljl.look.user.service.DiscussionService.add(..))")
     public void addDiscussion(){}
 
-    @Pointcut("execution(public * org.ljl.look.user.service.FocusService.add(..))")
-    public void addFocus(){}
+    @Pointcut("execution(public * org.ljl.look.user.service.ActivityFocusService.add(..))")
+    public void addActivityFocus(){}
 
-    @Before("addTag()||addDiscussion()||addFocus()")
+    @Pointcut("execution(public * org.ljl.look.user.service.ActivityLikeService.add(..))")
+    public void addLike(){}
+
+    @Pointcut("execution(public * org.ljl.look.user.service.JoinService.add(..))")
+    public void addJoin(){}
+
+    @Before("addTag()||addDiscussion()||addActivityFocus()||addLike()||addJoin()")
     public void doBeforeAdd(JoinPoint joinPoint) throws Exception {
         Object object = joinPoint.getArgs()[0];
         if (object instanceof Tag) {
@@ -40,13 +43,30 @@ public class CommonAttributeAspect {
         } else if (object instanceof Discussion) {
             Discussion discussion = (Discussion) object;
             discussion.setUuid(UuidTool.getValue());
+            discussion.setLikeCount(0);
+            discussion.setDislikeCount(0);
+            if (discussion.getBelongToDiscussion() == null) {
+                discussion.setBelongToDiscussion(ConstConfig.SINGLE_DISCUSSION);
+            }
+            if (discussion.getToUser() == null) {
+                discussion.setToUser(ConstConfig.NONE_USER);
+            }
             discussion.setDiscussDate(new Date());
             discussion.setValid(ConstConfig.VALID);
-        } else if (object instanceof Focus) {
-            Focus focus = (Focus) object;
-            focus.setUuid(UuidTool.getValue());
-            focus.setFocusDate(new Date());
-            focus.setValid(ConstConfig.VALID);
+        } else if (object instanceof ActivityFocus) {
+            ActivityFocus activityFocus = (ActivityFocus) object;
+            activityFocus.setUuid(UuidTool.getValue());
+            activityFocus.setFocusDate(new Date());
+            activityFocus.setValid(ConstConfig.VALID);
+        } else if (object instanceof ActivityLike) {
+            ActivityLike activityLike = (ActivityLike) object;
+            activityLike.setUuid(UuidTool.getValue());
+            activityLike.setValid(ConstConfig.VALID);
+        } else if (object instanceof Join) {
+            Join join =  (Join) object;
+            join.setUuid(UuidTool.getValue());
+            join.setJoinDate(new Date());
+            join.setValid(ConstConfig.VALID);
         }
     }
 

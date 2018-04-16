@@ -5,10 +5,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-import org.ljl.look.user.entity.Discussion;
-import org.ljl.look.user.entity.Focus;
-import org.ljl.look.user.entity.Tag;
-import org.ljl.look.user.entity.User;
+import org.ljl.look.user.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
@@ -39,14 +36,21 @@ public class OpenIdAspect {
     @Pointcut("execution(public * org.ljl.look.user.controller.DiscussionController.post(..))")
     public void postDiscussion() {}
 
-    @Pointcut("execution(public * org.ljl.look.user.controller.DiscussionController.post(..))")
-    public void postFocus() {}
+    @Pointcut("execution(public * org.ljl.look.user.controller.ActivityLikeController.post(..))")
+    public void postLike() {}
 
-    @Before("postUser()||postTag()||postTags()||postDiscussion()||postFocus()")
+    @Pointcut("execution(public * org.ljl.look.user.controller.ActivityFocusController.post(..))")
+    public void postActivityFocus() {}
+
+    @Pointcut("execution(public * org.ljl.look.user.controller.JoinController.post(..))")
+    public void postJoin() {}
+
+    @Before("postUser()||postTag()||postTags()||postDiscussion()||postActivityFocus()||postLike()||postJoin()")
     public void doBeforeWeavingOpenId(JoinPoint joinPoint) throws Exception {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
         String openId = stringRedisTemplate.opsForValue().get(request.getHeader("token"));
+        // 根据参数类型判断
         Arrays.stream(joinPoint.getArgs()).forEach(arg -> {
             if (arg instanceof User) { // User
                 ((User) arg).setOpenId(openId);
@@ -54,8 +58,12 @@ public class OpenIdAspect {
                 ((Tag) arg).setUserOpenId(openId);
             } else if (arg instanceof Discussion) { // Discussion
                 ((Discussion) arg).setFromUser(openId);
-            } else if (arg instanceof Focus) { // Focus
-                ((Focus) arg).setFromUser(openId);
+            } else if (arg instanceof ActivityFocus) { // ActivityFocus
+                ((ActivityFocus) arg).setFromUser(openId);
+            } else if (arg instanceof ActivityLike) { // ActivityLike
+                ((ActivityLike) arg).setFromUser(openId);
+            } else if (arg instanceof Join) {
+                ((Join) arg).setFromUser(openId);
             }
             if (arg instanceof List) {
                 ((List) arg).forEach(e -> {

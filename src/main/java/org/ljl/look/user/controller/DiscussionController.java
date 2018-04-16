@@ -30,4 +30,10 @@ public class DiscussionController {
     public List<Discussion> getsByBelongToActivity(@RequestParam String belongToActivity) {
         return discussionService.getByBelongToActivity(belongToActivity);
     }
+
+    @GetMapping("/count")
+    @ResponseStatus(HttpStatus.OK)
+    public int countByBelongToActivity(@RequestParam String belongToActivity) {
+        return discussionService.countByBelongToActivity(belongToActivity);
+    }
 }

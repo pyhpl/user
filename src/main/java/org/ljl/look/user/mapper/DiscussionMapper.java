@@ -15,6 +15,9 @@ public interface DiscussionMapper {
     @Select("SELECT * FROM discussion WHERE belong_to_activity=#{belongToActivity}::uuid")
     List<Discussion> selectByBelongToActivity(@Param("belongToActivity") String belongToActivity);
 
-    @Insert("INSERT INTO discussion VALUES(#{uuid}::uuid, #{belongToActivity}::uuid, #{fromUser}, #{toUser}, #{contents}, #{likeCount}, #{dislikeCount}, #{discussDate}, #{valid}), #{belong_to_discussion}::uuid")
+    @Insert("INSERT INTO discussion VALUES(#{uuid}::uuid, #{belongToActivity}::uuid, #{belongToDiscussion}::uuid, #{fromUser}, #{toUser}, #{contents}, #{likeCount}, #{dislikeCount}, #{discussDate}, #{valid})")
     void insert(Discussion discussion);
+
+    @Select("SELECT count(*) FROM discussion WHERE belong_to_activity=#{belongToActivity}::uuid")
+    int countByBelongToActivity(@Param("belongToActivity") String belongToActivity);
 }
