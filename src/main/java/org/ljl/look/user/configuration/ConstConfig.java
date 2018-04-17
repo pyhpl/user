@@ -10,4 +10,10 @@ public class ConstConfig {
     public static final short UNVALID = (short) 0;
     public static final String NONE_USER = "os0pV4xNonEf20xsQkycdWk-vVe0";
     public static final String SINGLE_DISCUSSION = "e2444628-5bea-4944-9867-bf92d6a90b36";
+
+    public static final String PAGE_INFO_JSON_STR = "pageInfoJsonStr";
+    public static final String PAGE_NUM = "pageNum";
+    public static final String PAGE_SIZE = "pageSize";
+    public static final String DEFAULT_PAGE_NUM = "1";
+    public static final String DEFAULT_PAGE_SIZE = "10";
 }

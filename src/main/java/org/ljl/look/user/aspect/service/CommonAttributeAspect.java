@@ -32,7 +32,10 @@ public class CommonAttributeAspect {
     @Pointcut("execution(public * org.ljl.look.user.service.JoinService.add(..))")
     public void addJoin(){}
 
-    @Before("addTag()||addDiscussion()||addActivityFocus()||addLike()||addJoin()")
+    @Pointcut("execution(public * org.ljl.look.user.service.TopicFocusService.add(..))")
+    public void addTopicFocus(){}
+
+    @Before("addTag()||addDiscussion()||addActivityFocus()||addLike()||addJoin()||addTopicFocus()")
     public void doBeforeAdd(JoinPoint joinPoint) throws Exception {
         Object object = joinPoint.getArgs()[0];
         if (object instanceof Tag) {
@@ -67,6 +70,11 @@ public class CommonAttributeAspect {
             join.setUuid(UuidTool.getValue());
             join.setJoinDate(new Date());
             join.setValid(ConstConfig.VALID);
+        } else if (object instanceof TopicFocus) {
+            TopicFocus topicFocus = (TopicFocus) object;
+            topicFocus.setUuid(UuidTool.getValue());
+            topicFocus.setFocusDate(new Date());
+            topicFocus.setValid(ConstConfig.VALID);
         }
     }
 

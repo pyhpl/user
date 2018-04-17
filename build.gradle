@@ -25,6 +25,7 @@ archivesBaseName = 'user' // jar包名称。
 sourceCompatibility = 1.8
 
 repositories {
+    mavenLocal()
     mavenCentral()
     maven { url "https://repo.spring.io/milestone" }
 }
@@ -32,6 +33,7 @@ repositories {
 dependencies {
     compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client') // Spring cloud客户端。
     compile('org.springframework.boot:spring-boot-starter-web')
+    compile('com.github.pagehelper:pagehelper-spring-boot-starter:1.2.4')
     compile('org.projectlombok:lombok:1.16.18')
     compile('org.postgresql:postgresql:42.1.1')
     compile('org.apache.commons:commons-pool2:2.4.2')

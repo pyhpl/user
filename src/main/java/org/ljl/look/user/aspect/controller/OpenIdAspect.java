@@ -45,7 +45,10 @@ public class OpenIdAspect {
     @Pointcut("execution(public * org.ljl.look.user.controller.JoinController.post(..))")
     public void postJoin() {}
 
-    @Before("postUser()||postTag()||postTags()||postDiscussion()||postActivityFocus()||postLike()||postJoin()")
+    @Pointcut("execution(public * org.ljl.look.user.controller.TopicFocusController.post(..))")
+    public void postTopicFocus() {}
+
+    @Before("postUser()||postTag()||postTags()||postDiscussion()||postActivityFocus()||postLike()||postJoin()||postTopicFocus()")
     public void doBeforeWeavingOpenId(JoinPoint joinPoint) throws Exception {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
@@ -64,6 +67,8 @@ public class OpenIdAspect {
                 ((ActivityLike) arg).setFromUser(openId);
             } else if (arg instanceof Join) {
                 ((Join) arg).setFromUser(openId);
+            } else if (arg instanceof TopicFocus) {
+                ((TopicFocus) arg).setFromUser(openId);
             }
             if (arg instanceof List) {
                 ((List) arg).forEach(e -> {
