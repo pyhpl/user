@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/activity-focus")
 public class ActivityFocusController {
 
     @Autowired
@@ -19,7 +18,7 @@ public class ActivityFocusController {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
-    @PostMapping("")
+    @PostMapping("/api/activity-focus")
     @ResponseStatus(HttpStatus.CREATED)
     public HttpHeaders post(@RequestBody ActivityFocus activityFocus) {
         activityFocusService.add(activityFocus);
@@ -28,19 +27,19 @@ public class ActivityFocusController {
         }};
     }
 
-    @GetMapping("s")
+    @GetMapping("/api/user/activity-focus/s")
     @ResponseStatus(HttpStatus.OK)
-    public List<ActivityFocus> getsByFromUser(@RequestParam String fromUser) {
-        return activityFocusService.getsByFromUser(fromUser);
+    public List<ActivityFocus> getsByFromUser(@RequestHeader("token") String token) {
+        return activityFocusService.getsByFromUser(stringRedisTemplate.opsForValue().get(token));
     }
 
-    @DeleteMapping("")
+    @DeleteMapping("/api/activity-focus")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteByUuid(@RequestParam String uuid) {
         activityFocusService.deleteByUuid(uuid);
     }
 
-    @GetMapping("")
+    @GetMapping("/api/activity-focus")
     @ResponseStatus(HttpStatus.OK)
     public ActivityFocus get(@RequestHeader("token") String token, @RequestParam String activityUuid) {
         return activityFocusService.getByActivityUuidAndFromUser(activityUuid, stringRedisTemplate.opsForValue().get(token));

@@ -13,7 +13,7 @@ public interface ActivityFocusMapper {
     @Insert("INSERT INTO activity_focus VALUES(#{uuid}::uuid, #{fromUser}, #{activityUuid}::uuid, #{focusDate}, #{valid})")
     void insert(ActivityFocus activityFocus);
 
-    @Select("SELECT * FROM activity_focus WHERE from_user=#{fromUser}")
+    @Select("SELECT * FROM activity_focus WHERE from_user=#{fromUser} AND valid=${@org.ljl.look.user.configuration.ConstConfig@VALID}")
     List<ActivityFocus> selectByFromUser(@Param("fromUser") String fromUser);
 
     @Select("SELECT * FROM activity_focus WHERE from_user=#{fromUser} AND activity_uuid=#{activityUuid}::uuid")

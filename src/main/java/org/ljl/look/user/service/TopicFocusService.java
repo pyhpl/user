@@ -40,7 +40,7 @@ public class TopicFocusService {
         topicFocuses.forEach(topicFocus -> {
             TopicFocus e = topicFocusMapper.selectByFromUserAndTopicUuidAndValid(topicFocus.getFromUser(), topicFocus.getTopicUuid());
             if (e != null) {
-                focusedTopics.add(topicFocus);
+                focusedTopics.add(e);
             }
         });
         return focusedTopics;
@@ -52,5 +52,9 @@ public class TopicFocusService {
                     TopicFocus.builder().topicUuid(topicUuid).build()
                 )
                 .collect(Collectors.toList());
+    }
+
+    public List<TopicFocus> getsByFromUser(String fromUser) {
+        return topicFocusMapper.selectByFromUser(fromUser);
     }
 }

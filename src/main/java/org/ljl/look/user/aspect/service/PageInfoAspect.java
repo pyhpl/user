@@ -22,9 +22,15 @@ import java.util.Map;
 public class PageInfoAspect {
 
     @Pointcut("execution(public * org.ljl.look.user.service.TopicFocusService.get*(..))")
-    public void getHot(){}
+    public void getTopic(){}
 
-    @Before("getHot()")
+    @Pointcut("execution(public * org.ljl.look.user.service.ActivityFocusService.get*(..))")
+    public void getActivityFocus(){}
+
+    @Pointcut("execution(public * org.ljl.look.user.service.JoinService.get*(..))")
+    public void getJoin(){}
+
+    @Before("getTopic()||getActivityFocus()||getJoin()")
     public void doBeforeAdd(JoinPoint joinPoint) throws Exception {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();

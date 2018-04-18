@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class JoinService {
@@ -35,5 +37,9 @@ public class JoinService {
         Join activityLike = Join.builder()
                 .activityUuid(activityUuid).fromUser(fromUser).valid(ConstConfig.VALID).build();
         return joinMapper.selectByActivityUuidAndFromUserAndValid(activityLike);
+    }
+
+    public List<Join> getsByFromUser(String fromUser) {
+        return joinMapper.selectByFromUser(fromUser);
     }
 }

@@ -12,6 +12,9 @@ public interface JoinMapper {
     @Select("SELECT * FROM joins WHERE activity_uuid=#{activityUuid}::uuid")
     List<Join> selectByActivityUuid(@Param("activityUuid") String activityUuid);
 
+    @Select("SELECT * FROM joins WHERE from_user=#{fromUser} AND valid=${@org.ljl.look.user.configuration.ConstConfig@VALID}")
+    List<Join> selectByFromUser(@Param("fromUser") String fromUser);
+
     @Select("SELECT count(*) FROM joins WHERE activity_uuid=#{activityUuid}::uuid")
     int countByActivityUuid(@Param("activityUuid") String activityUuid);
 

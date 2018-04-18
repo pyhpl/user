@@ -28,4 +28,7 @@ public interface TopicFocusMapper {
     @Select("SELECT topic_uuid FROM topic_focus WHERE valid=${@org.ljl.look.user.configuration.ConstConfig@VALID} GROUP BY topic_uuid ORDER BY count(*)")
     List<String> selectTopicUuidGroupByTopicUuidOrderByCount();
 
+    @Select("SELECT * FROM topic_focus WHERE from_user=#{fromUser} AND valid=${@org.ljl.look.user.configuration.ConstConfig@VALID}")
+    List<TopicFocus> selectByFromUser(@Param("fromUser") String fromUser);
+
 }
