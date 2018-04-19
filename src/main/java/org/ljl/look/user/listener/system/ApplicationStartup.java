@@ -1,4 +1,4 @@
-package org.ljl.look.user.listener;
+package org.ljl.look.user.listener.system;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
