@@ -1,4 +1,4 @@
-package org.ljl.look.user.listener.message;
+package org.ljl.look.user.message.receiver;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.ljl.look.user.configuration.ConstConfig;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RabbitListener(queues = ConstConfig.QUEUE_TOPIC_FOCUS)
-public class TopicFocusMessaging {
+public class TopicFocusReceiver {
     @Autowired
     private TopicFocusService topicFocusService;
 

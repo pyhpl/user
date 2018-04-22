@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMqConfig {
     @Bean
-    Queue queue() {
+    Queue topicFocusQueue() {
         return new Queue(ConstConfig.QUEUE_TOPIC_FOCUS);
     }
 }

@@ -20,5 +20,5 @@ eureka:
       defaultZone: http://localhost:8000/eureka/
 wx-code-api:
   base-url: https://api.weixin.qq.com/sns/jscode2session
-  app-id: wx1e3bc888e28279a6
   secret: d65d410d1f8013c566ae08c45200f9f3
+  app-id: wx1e3bc888e28279a6
