@@ -3,6 +3,7 @@ package org.ljl.look.user.message.receiver;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.ljl.look.user.configuration.ConstConfig;
 import org.ljl.look.user.entity.TopicFocus;
+import org.ljl.look.user.message.wrapper.Message;
 import org.ljl.look.user.service.TopicFocusService;
 import org.ljl.look.user.util.JsonTool;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
@@ -17,9 +18,12 @@ public class TopicFocusReceiver {
     private TopicFocusService topicFocusService;
 
     @RabbitHandler
-    public void process(String topicFocusJson) {
-        topicFocusService.add(
-                JsonTool.fromJson(topicFocusJson, new TypeReference<TopicFocus>() {})
-        );
+    public void process(String topicFocusMessageJson) {
+        Message<TopicFocus> topicFocusMessage = JsonTool.fromJson(topicFocusMessageJson, new TypeReference<Message<TopicFocus>>() {});
+        switch (topicFocusMessage.getMethod()) {
+            case POST:
+                topicFocusService.add(topicFocusMessage.getBody());
+                break;
+        }
     }
 }
