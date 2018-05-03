@@ -10,4 +10,14 @@ public class RabbitMqConfig {
     Queue topicFocusQueue() {
         return new Queue(ConstConfig.QUEUE_TOPIC_FOCUS);
     }
+
+    @Bean
+    Queue joinQueue() {
+        return new Queue(ConstConfig.QUEUE_JOIN);
+    }
+
+    @Bean
+    Queue joinMessageQueue() {
+        return new Queue(ConstConfig.QUEUE_JOIN_MESSAGE);
+    }
 }

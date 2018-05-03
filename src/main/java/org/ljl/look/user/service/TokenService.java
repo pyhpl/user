@@ -38,6 +38,8 @@ public class TokenService {
         log.info("token({}): {}", openId, token);
         // 将token存入redis中
         stringRedisTemplate.opsForValue().set(token, openId);
+        stringRedisTemplate.opsForValue().set(openId, token);
+        System.out.println(stringRedisTemplate.opsForValue().get(openId));
         return token;
     }
 

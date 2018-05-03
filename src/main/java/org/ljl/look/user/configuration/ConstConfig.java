@@ -20,4 +20,6 @@ public class ConstConfig {
 
     /** rabbit mq */
     public static final String QUEUE_TOPIC_FOCUS = "queueTopicFocus";
+    public static final String QUEUE_JOIN = "queueJoin";
+    public static final String QUEUE_JOIN_MESSAGE = "queueJoinMessage";
 }
